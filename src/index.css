@@ -1,0 +1,17 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background: #FAF3E8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: inherit; }
+
+button { font-family: inherit; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F5EAD8; }
+::-webkit-scrollbar-thumb { background: #C8A87A; border-radius: 3px; }

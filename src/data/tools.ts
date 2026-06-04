@@ -1,0 +1,285 @@
+export interface Tool {
+  id: string;
+  name: string;
+  category: 'compose' | 'record' | 'mix' | 'master' | 'distribute' | 'collaborate' | 'promote';
+  description: string;
+  url: string;
+  free: boolean;
+  tags: string[];
+  icon: string;
+}
+
+export const CATEGORIES = {
+  compose: { label: 'Compose & Write', color: '#8B5E3C', bg: '#F5EDE4' },
+  record:  { label: 'Record',          color: '#4A7C59', bg: '#E8F4EC' },
+  mix:     { label: 'Mix & Produce',   color: '#2C5F8A', bg: '#E3EEF7' },
+  master:  { label: 'Master',          color: '#7B3FA0', bg: '#F0E6F7' },
+  distribute: { label: 'Distribute',   color: '#B85C1A', bg: '#FAEEE5' },
+  collaborate: { label: 'Collaborate', color: '#3A7A7A', bg: '#E4F3F3' },
+  promote: { label: 'Promote',         color: '#8A3A3A', bg: '#F7E6E6' },
+};
+
+export const WORKFLOW_STAGES = [
+  { key: 'compose',     label: 'Write',    step: 1 },
+  { key: 'record',      label: 'Record',   step: 2 },
+  { key: 'mix',         label: 'Mix',      step: 3 },
+  { key: 'master',      label: 'Master',   step: 4 },
+  { key: 'distribute',  label: 'Release',  step: 5 },
+  { key: 'promote',     label: 'Promote',  step: 6 },
+];
+
+export const TOOLS: Tool[] = [
+  // COMPOSE
+  {
+    id: 'noteflight',
+    name: 'Noteflight',
+    category: 'compose',
+    description: 'Browser-based music notation editor. Write sheet music, chord charts, and lead sheets for your songs.',
+    url: 'https://www.noteflight.com',
+    free: true,
+    tags: ['notation', 'sheet music', 'chords'],
+    icon: '🎼',
+  },
+  {
+    id: 'hookpad',
+    name: 'Hookpad',
+    category: 'compose',
+    description: 'Chord progression and melody writing tool with built-in theory guidance. Great for songwriting.',
+    url: 'https://www.hooktheory.com/hookpad',
+    free: false,
+    tags: ['chords', 'melody', 'theory'],
+    icon: '🎹',
+  },
+  {
+    id: 'lyricsstudio',
+    name: 'Lyrics.com Studio',
+    category: 'compose',
+    description: 'Rhyme finder, syllable counter, and lyric writing tools to craft song lyrics.',
+    url: 'https://www.lyrics.com/songwriting-tool.php',
+    free: true,
+    tags: ['lyrics', 'rhymes', 'songwriting'],
+    icon: '✍️',
+  },
+  {
+    id: 'soundtrap',
+    name: 'Soundtrap',
+    category: 'compose',
+    description: 'Cloud DAW with loops, instruments, and collaboration. Write and sketch ideas in the browser.',
+    url: 'https://www.soundtrap.com',
+    free: true,
+    tags: ['DAW', 'loops', 'beats'],
+    icon: '🎵',
+  },
+
+  // RECORD
+  {
+    id: 'bandlab',
+    name: 'BandLab',
+    category: 'record',
+    description: 'Free cloud-based DAW with multi-track recording, effects, and unlimited storage.',
+    url: 'https://www.bandlab.com',
+    free: true,
+    tags: ['DAW', 'recording', 'multitrack'],
+    icon: '🎙️',
+  },
+  {
+    id: 'audacity-web',
+    name: 'Audacity (Desktop, Free)',
+    category: 'record',
+    description: 'Industry-standard free audio editor and recorder. Download and record locally.',
+    url: 'https://www.audacityteam.org',
+    free: true,
+    tags: ['recording', 'audio editor', 'free'],
+    icon: '🔴',
+  },
+  {
+    id: 'clyp',
+    name: 'Clyp',
+    category: 'record',
+    description: 'Quick audio recording and sharing in the browser. Great for voice memos and quick demos.',
+    url: 'https://clyp.it',
+    free: true,
+    tags: ['quick recording', 'demos', 'sharing'],
+    icon: '🎤',
+  },
+
+  // MIX
+  {
+    id: 'bandlab-mix',
+    name: 'BandLab Mixer',
+    category: 'mix',
+    description: 'Built-in multi-track mixer with EQ, compression, reverb, and over 100 effects in the browser.',
+    url: 'https://www.bandlab.com',
+    free: true,
+    tags: ['mixing', 'EQ', 'effects'],
+    icon: '🎚️',
+  },
+  {
+    id: 'daw-plugins',
+    name: 'Splice',
+    category: 'mix',
+    description: 'Rent-to-own plugins and sample library. Access top VSTs for your mixing workflow.',
+    url: 'https://splice.com',
+    free: false,
+    tags: ['plugins', 'samples', 'VST'],
+    icon: '🔌',
+  },
+  {
+    id: 'izotope-ozone',
+    name: 'iZotope Ozone (Elements)',
+    category: 'mix',
+    description: 'AI-assisted mixing and mastering suite. Elements tier is affordable with smart EQ and balance.',
+    url: 'https://www.izotope.com/en/products/ozone.html',
+    free: false,
+    tags: ['AI mix', 'mastering', 'EQ'],
+    icon: '🤖',
+  },
+
+  // MASTER
+  {
+    id: 'landr',
+    name: 'LANDR',
+    category: 'master',
+    description: 'AI-powered online mastering. Upload your mix and get a release-ready master in minutes.',
+    url: 'https://www.landr.com',
+    free: false,
+    tags: ['AI mastering', 'online', 'fast'],
+    icon: '✨',
+  },
+  {
+    id: 'cloudBounce',
+    name: 'CloudBounce',
+    category: 'master',
+    description: 'Automated online mastering powered by iZotope technology. Pay-per-master model.',
+    url: 'https://cloudbounce.com',
+    free: false,
+    tags: ['mastering', 'pay per use', 'iZotope'],
+    icon: '☁️',
+  },
+  {
+    id: 'auphonic',
+    name: 'Auphonic',
+    category: 'master',
+    description: 'Automatic audio leveling, noise reduction, and loudness normalization for broadcast standards.',
+    url: 'https://auphonic.com',
+    free: true,
+    tags: ['loudness', 'normalization', 'leveling'],
+    icon: '📊',
+  },
+
+  // DISTRIBUTE
+  {
+    id: 'distrokid',
+    name: 'DistroKid',
+    category: 'distribute',
+    description: 'Upload unlimited songs to Spotify, Apple Music, Amazon, TikTok, and 150+ stores for a flat annual fee.',
+    url: 'https://distrokid.com',
+    free: false,
+    tags: ['distribution', 'Spotify', 'Apple Music'],
+    icon: '🚀',
+  },
+  {
+    id: 'tunecore',
+    name: 'TuneCore',
+    category: 'distribute',
+    description: 'Music distribution with 100% royalty payback to artists. Per-release pricing model.',
+    url: 'https://www.tunecore.com',
+    free: false,
+    tags: ['distribution', 'royalties', '100%'],
+    icon: '💿',
+  },
+  {
+    id: 'soundcloud',
+    name: 'SoundCloud',
+    category: 'distribute',
+    description: 'Publish and share music directly with a global community. Free tier for up to 3 hours of audio.',
+    url: 'https://soundcloud.com',
+    free: true,
+    tags: ['streaming', 'community', 'free'],
+    icon: '🔊',
+  },
+  {
+    id: 'bandcamp',
+    name: 'Bandcamp',
+    category: 'distribute',
+    description: 'Sell music directly to fans. Artists keep 80–85% of revenue. Great for independent releases.',
+    url: 'https://bandcamp.com',
+    free: true,
+    tags: ['sell music', 'direct to fan', 'merch'],
+    icon: '🏪',
+  },
+
+  // COLLABORATE
+  {
+    id: 'splice-collab',
+    name: 'Splice Collabs',
+    category: 'collaborate',
+    description: 'Cloud collaboration for DAW projects. Share and co-produce Logic, Ableton, FL Studio sessions.',
+    url: 'https://splice.com',
+    free: false,
+    tags: ['DAW sync', 'co-produce', 'version control'],
+    icon: '🤝',
+  },
+  {
+    id: 'google-drive',
+    name: 'Google Drive',
+    category: 'collaborate',
+    description: 'Share stems, mixes, and documents with Bryan and collaborators. 15 GB free.',
+    url: 'https://drive.google.com',
+    free: true,
+    tags: ['file sharing', 'stems', 'storage'],
+    icon: '📁',
+  },
+  {
+    id: 'notion',
+    name: 'Notion',
+    category: 'collaborate',
+    description: 'Track songs in progress, lyrics, project notes, and release checklists.',
+    url: 'https://www.notion.so',
+    free: true,
+    tags: ['project management', 'lyrics', 'notes'],
+    icon: '📝',
+  },
+
+  // PROMOTE
+  {
+    id: 'submithub',
+    name: 'SubmitHub',
+    category: 'promote',
+    description: 'Submit songs to blogs, YouTube channels, Spotify playlists, and radio stations.',
+    url: 'https://www.submithub.com',
+    free: true,
+    tags: ['playlist pitching', 'blog submission', 'radio'],
+    icon: '📨',
+  },
+  {
+    id: 'groover',
+    name: 'Groover',
+    category: 'promote',
+    description: 'Guaranteed feedback and promotion from music curators, bloggers, and playlist editors.',
+    url: 'https://groover.co',
+    free: false,
+    tags: ['promotion', 'curators', 'feedback'],
+    icon: '📣',
+  },
+  {
+    id: 'canva',
+    name: 'Canva',
+    category: 'promote',
+    description: 'Design album artwork, social media posts, and promotional materials with ease.',
+    url: 'https://www.canva.com',
+    free: true,
+    tags: ['artwork', 'design', 'social media'],
+    icon: '🎨',
+  },
+  {
+    id: 'linktree',
+    name: 'Linktree',
+    category: 'promote',
+    description: 'One link in bio that points fans to all your music platforms, social accounts, and merch.',
+    url: 'https://linktr.ee',
+    free: true,
+    tags: ['link in bio', 'social', 'fan page'],
+    icon: '🌲',
+  },
+];
