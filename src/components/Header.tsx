@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const NAV = [
@@ -10,6 +10,9 @@ const NAV = [
 
 export default function Header() {
   const { pathname } = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const close = () => setMenuOpen(false);
 
   return (
     <header style={styles.header}>
@@ -20,7 +23,9 @@ export default function Header() {
           <div style={styles.studioSub}>Music Studio · Bryan Lewis</div>
         </div>
       </div>
-      <nav style={styles.nav}>
+
+      {/* Desktop nav */}
+      <nav className="header-nav-links">
         {NAV.map(({ path, label }) => (
           <Link
             key={path}
@@ -34,6 +39,31 @@ export default function Header() {
           </Link>
         ))}
       </nav>
+
+      {/* Hamburger button — mobile only */}
+      <button
+        className="hamburger-btn"
+        onClick={() => setMenuOpen(v => !v)}
+        aria-label="Toggle menu"
+      >
+        {menuOpen ? '✕' : '☰'}
+      </button>
+
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <nav className="mobile-nav">
+          {NAV.map(({ path, label }) => (
+            <Link
+              key={path}
+              to={path}
+              className={pathname === path ? 'active' : ''}
+              onClick={close}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }
@@ -42,7 +72,7 @@ const styles: Record<string, React.CSSProperties> = {
   header: {
     background: 'linear-gradient(135deg, #3B1F0A 0%, #6B3A1F 100%)',
     color: '#F5E6C8',
-    padding: '0 2rem',
+    padding: '0 1.5rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -73,10 +103,6 @@ const styles: Record<string, React.CSSProperties> = {
     color: '#C8A87A',
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
-  },
-  nav: {
-    display: 'flex',
-    gap: '0.25rem',
   },
   link: {
     color: '#C8A87A',

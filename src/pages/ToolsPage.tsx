@@ -5,21 +5,24 @@ import ToolCard from '../components/ToolCard';
 const ALL = 'all';
 
 export default function ToolsPage() {
-  const [filter, setFilter] = useState<string>(ALL);
+  const [filter, setFilter]   = useState<string>(ALL);
   const [freeOnly, setFreeOnly] = useState(false);
-  const [search, setSearch] = useState('');
+  const [search, setSearch]   = useState('');
 
   const filtered = TOOLS.filter(t => {
     if (filter !== ALL && t.category !== filter) return false;
     if (freeOnly && !t.free) return false;
-    if (search && !t.name.toLowerCase().includes(search.toLowerCase()) && !t.tags.join(' ').toLowerCase().includes(search.toLowerCase())) return false;
+    if (search) {
+      const q = search.toLowerCase();
+      if (!t.name.toLowerCase().includes(q) && !t.tags.join(' ').toLowerCase().includes(q)) return false;
+    }
     return true;
   });
 
   return (
     <div style={styles.page}>
-      <div style={styles.content}>
-        <div style={styles.titleBlock}>
+      <div className="page-content">
+        <div>
           <h1 style={styles.title}>Tool Library</h1>
           <p style={styles.subtitle}>Recommended online tools for every stage of Bryan's music production workflow.</p>
         </div>
@@ -69,7 +72,7 @@ export default function ToolsPage() {
 
         <div style={styles.resultCount}>{filtered.length} tool{filtered.length !== 1 ? 's' : ''}</div>
 
-        <div style={styles.grid}>
+        <div className="tools-grid">
           {filtered.map(tool => (
             <ToolCard key={tool.id} tool={tool} />
           ))}
@@ -84,20 +87,20 @@ export default function ToolsPage() {
 
 const styles: Record<string, React.CSSProperties> = {
   page: { background: '#FAF3E8', minHeight: '100vh' },
-  content: { maxWidth: '1000px', margin: '0 auto', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' },
-  titleBlock: {},
-  title: { fontSize: '1.8rem', fontWeight: 800, color: '#3B1F0A', margin: '0 0 0.25rem' },
+  title:    { fontSize: '1.8rem', fontWeight: 800, color: '#3B1F0A', margin: '0 0 0.25rem' },
   subtitle: { color: '#7A5A3A', margin: 0, fontSize: '0.95rem' },
   filterBar: { display: 'flex', flexDirection: 'column', gap: '0.75rem' },
   searchInput: {
     border: '1px solid #DFC9A8',
     borderRadius: '8px',
-    padding: '0.6rem 1rem',
+    padding: '0.65rem 1rem',
     fontSize: '0.9rem',
     background: '#FEFAF4',
     color: '#3B1F0A',
     outline: 'none',
-    width: '280px',
+    width: '100%',
+    maxWidth: '320px',
+    boxSizing: 'border-box',
   },
   catButtons: { display: 'flex', gap: '0.4rem', flexWrap: 'wrap' as const },
   catBtn: {
@@ -111,17 +114,8 @@ const styles: Record<string, React.CSSProperties> = {
     color: '#6A4A2A',
     transition: 'all 0.15s',
   },
-  catBtnActive: {
-    background: '#3B1F0A',
-    color: '#F5E6C8',
-    borderColor: '#3B1F0A',
-  },
+  catBtnActive: { background: '#3B1F0A', color: '#F5E6C8', borderColor: '#3B1F0A' },
   freeToggle: { fontSize: '0.85rem', color: '#6A4A2A', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center' },
   resultCount: { fontSize: '0.8rem', color: '#9A7A5A', fontWeight: 500 },
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gap: '1rem',
-  },
   empty: { color: '#9A7A5A', fontSize: '0.9rem', gridColumn: '1/-1' },
 };

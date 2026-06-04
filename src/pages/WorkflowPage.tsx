@@ -89,20 +89,21 @@ export default function WorkflowPage() {
 
   return (
     <div style={styles.page}>
-      <div style={styles.content}>
-        <div style={styles.titleBlock}>
+      <div className="page-content">
+        <div>
           <h1 style={styles.title}>Production Workflow</h1>
           <p style={styles.subtitle}>Bryan's step-by-step guide from idea to release.</p>
         </div>
 
-        {/* Stage Tabs */}
-        <div style={styles.tabs}>
+        {/* Stage Tabs — scrollable on mobile */}
+        <div className="workflow-tabs" style={styles.tabs}>
           {WORKFLOW_STAGES.map(stage => {
             const cat = CATEGORIES[stage.key as keyof typeof CATEGORIES];
             const isActive = activeStage === stage.key;
             return (
               <button
                 key={stage.key}
+                className="workflow-tab"
                 onClick={() => setActiveStage(stage.key)}
                 style={{
                   ...styles.tab,
@@ -124,16 +125,12 @@ export default function WorkflowPage() {
           <div style={styles.stagePanelContent}>
             <h2 style={styles.stageTitle}>{tip.heading}</h2>
             <p style={styles.stageBody}>{tip.body}</p>
-            <div style={styles.stepsGrid}>
-              <div>
-                <div style={styles.stepsHeading}>Steps</div>
-                <ol style={styles.stepsList}>
-                  {tip.steps.map((s, i) => (
-                    <li key={i} style={styles.step}>{s}</li>
-                  ))}
-                </ol>
-              </div>
-            </div>
+            <div style={styles.stepsHeading}>Steps</div>
+            <ol style={styles.stepsList}>
+              {tip.steps.map((s, i) => (
+                <li key={i} style={styles.step}>{s}</li>
+              ))}
+            </ol>
           </div>
         </div>
 
@@ -143,7 +140,7 @@ export default function WorkflowPage() {
             Tools for {CATEGORIES[stageCat].label}
             <span style={styles.toolsCount}>{stageTools.length} tools</span>
           </h2>
-          <div style={styles.toolsGrid}>
+          <div className="tools-grid">
             {stageTools.map(tool => (
               <ToolCard key={tool.id} tool={tool} />
             ))}
@@ -156,8 +153,6 @@ export default function WorkflowPage() {
 
 const styles: Record<string, React.CSSProperties> = {
   page: { background: '#FAF3E8', minHeight: '100vh' },
-  content: { maxWidth: '1000px', margin: '0 auto', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.75rem' },
-  titleBlock: {},
   title: { fontSize: '1.8rem', fontWeight: 800, color: '#3B1F0A', margin: '0 0 0.25rem' },
   subtitle: { color: '#7A5A3A', margin: 0, fontSize: '0.95rem' },
   tabs: { display: 'flex', gap: '0.5rem', flexWrap: 'wrap' as const },
@@ -172,13 +167,14 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: 'center',
     gap: '0.4rem',
     transition: 'all 0.15s',
+    whiteSpace: 'nowrap' as const,
   },
   tabStep: {
     width: '18px',
     height: '18px',
     borderRadius: '50%',
     background: 'rgba(255,255,255,0.25)',
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: '0.7rem',
@@ -191,14 +187,13 @@ const styles: Record<string, React.CSSProperties> = {
     overflow: 'hidden',
     display: 'flex',
   },
-  stagePanelBar: { width: '6px', flexShrink: 0 },
+  stagePanelBar:     { width: '6px', flexShrink: 0 },
   stagePanelContent: { padding: '1.5rem', flex: 1 },
-  stageTitle: { fontSize: '1.2rem', fontWeight: 700, color: '#2D1A0A', margin: '0 0 0.5rem' },
-  stageBody: { color: '#5A3A1A', fontSize: '0.9rem', margin: '0 0 1rem', lineHeight: 1.6 },
-  stepsGrid: {},
+  stageTitle:  { fontSize: '1.2rem', fontWeight: 700, color: '#2D1A0A', margin: '0 0 0.5rem' },
+  stageBody:   { color: '#5A3A1A', fontSize: '0.9rem', margin: '0 0 1rem', lineHeight: 1.6 },
   stepsHeading: { fontSize: '0.75rem', fontWeight: 700, color: '#9A7A5A', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginBottom: '0.5rem' },
-  stepsList: { paddingLeft: '1.25rem', margin: 0 },
-  step: { color: '#4A3020', fontSize: '0.88rem', marginBottom: '0.4rem', lineHeight: 1.5 },
+  stepsList:   { paddingLeft: '1.25rem', margin: 0 },
+  step:        { color: '#4A3020', fontSize: '0.88rem', marginBottom: '0.4rem', lineHeight: 1.5 },
   toolsHeading: {
     fontSize: '1.1rem',
     fontWeight: 700,
@@ -215,10 +210,5 @@ const styles: Record<string, React.CSSProperties> = {
     color: '#7A4A20',
     padding: '2px 10px',
     borderRadius: '99px',
-  },
-  toolsGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gap: '1rem',
   },
 };
