@@ -1,46 +1,146 @@
-# Getting Started with Create React App
+# 🌾 The Farm Music Studio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A virtual AI-powered music studio for **Bryan Lewis** — built to support the full music production and publication workflow from first idea to release day.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## About
 
-### `npm start`
+The Farm Music Studio is a responsive web app with a warm, barn-wood aesthetic that guides Bryan through every stage of making and releasing music. It curates the best free and paid online tools for each stage and provides a live project tracker to keep songs moving from idea to release.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Features
 
-### `npm test`
+### Studio Dashboard
+- At-a-glance stats: active projects, tracks in progress, tool count
+- Quick Launch buttons — one tap to open any key tool (BandLab, Hookpad, LANDR, DistroKid, Canva, SubmitHub)
+- Snapshot of current projects with status badges
+- Visual production pipeline overview
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Production Workflow
+Six guided stages, each with step-by-step instructions and curated tools:
 
-### `npm run build`
+| Stage | Focus |
+|---|---|
+| 1. Write | Chord progressions, lyrics, notation |
+| 2. Record | Multi-track recording, voice memos, demos |
+| 3. Mix | EQ, compression, effects, automation |
+| 4. Master | AI mastering, loudness normalization |
+| 5. Release | Distribution to Spotify, Apple Music, Bandcamp, and more |
+| 6. Promote | Playlist pitching, artwork, social media, Linktree |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Tool Library
+- 24 curated online tools across 7 categories
+- Filter by production stage or free/paid
+- Search by name or tag
+- Direct launch links for every tool
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Projects Board
+- Kanban board tracking projects across all 6 stages
+- Add new singles, EPs, or albums on the fly
+- Per-project track listing with BPM, key, and status
+- One-tap "Advance to Next Stage" from the detail panel
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Recommended Tools
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+| Stage | Tool | Free? |
+|---|---|---|
+| Compose | Noteflight, Hookpad, Soundtrap | Free / Paid |
+| Record | BandLab, Audacity, Clyp | Free |
+| Mix | BandLab Mixer, Splice, iZotope Ozone | Free / Paid |
+| Master | LANDR, CloudBounce, Auphonic | Free / Paid |
+| Distribute | DistroKid, TuneCore, SoundCloud, Bandcamp | Free / Paid |
+| Collaborate | Splice, Google Drive, Notion | Free / Paid |
+| Promote | SubmitHub, Groover, Canva, Linktree | Free / Paid |
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Tech Stack
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **React 18** with TypeScript
+- **React Router v6** for client-side navigation
+- Responsive CSS with mobile-first media queries
+- No UI framework — all custom farm-themed styles
+- Deployed via **Netlify** (`netlify.toml` included)
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Getting Started
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Prerequisites
+- Node.js 16+
+- npm 8+
+
+### Run locally
+
+```bash
+git clone https://github.com/marcus7288/the-farm-music-studio
+cd the-farm-music-studio
+npm install
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Build for production
+
+```bash
+npm run build
+```
+
+The `build/` folder is ready to serve as a static site.
+
+---
+
+## Deployment (Netlify)
+
+This repo includes a `netlify.toml` with build settings pre-configured.
+
+1. Go to [app.netlify.com](https://app.netlify.com) and sign in
+2. Click **Add new site → Import an existing project**
+3. Connect GitHub and select `marcus7288/the-farm-music-studio`
+4. Netlify auto-detects the config — click **Deploy site**
+
+The `[[redirects]]` rule ensures React Router works correctly on direct URL visits.
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── Header.tsx        # Sticky nav with mobile hamburger menu
+│   ├── ToolCard.tsx      # Tool display card with launch link
+│   └── ProjectCard.tsx   # Project summary card for kanban
+├── data/
+│   ├── tools.ts          # 24 curated tools with metadata
+│   └── projects.ts       # Demo projects and status config
+├── pages/
+│   ├── Dashboard.tsx     # Studio home with quick launch
+│   ├── WorkflowPage.tsx  # 6-stage guided workflow
+│   ├── ToolsPage.tsx     # Filterable tool library
+│   └── ProjectsPage.tsx  # Kanban project tracker
+├── responsive.css        # Mobile/tablet media queries
+└── index.css             # Global base styles
+```
+
+---
+
+## Tips for Bryan
+
+- **Claim Spotify for Artists** before your first release — verification takes a few days
+- **Submit to Spotify editorial playlists** at least 7 days before release date via Spotify for Artists
+- **Export mixes as 24-bit WAV with no limiting** before uploading to LANDR
+- **DistroKid** is best for frequent releases (flat annual fee); **TuneCore** suits 1–2 releases/year
+- **Create a project for every idea**, even rough voice memos — use the "Idea" column as a parking lot
+- **Advance project status in real time**, not after the fact, to keep the board accurate
+
+---
+
+## License
+
+MIT
